@@ -40,8 +40,8 @@ uint16_t sbusFailsafeTimeout = 100; // Failsafe is triggered after this timeout 
 
 // CHANNEL LINEARITY SETTINGS  ****************************************************************************************************************
 
-#define EXPONENTIAL_THROTTLE // Exponential throttle curve. Ideal for enhanced slow speed control in crawlers
-// #define EXPONENTIAL_STEERING // Exponential steering curve. More steering accuracy around center position
+// #define EXPONENTIAL_THROTTLE // Exponential throttle curve. Ideal for enhanced slow speed control in crawlers
+//  #define EXPONENTIAL_STEERING // Exponential steering curve. More steering accuracy around center position
 
 // CHANNEL AVERAGING (EXPERIMENTAL!) **********************************************************************************************************
 // #define CHANNEL_AVERAGING // This is recommended, if you have issues with unstable channels
@@ -88,28 +88,29 @@ uint16_t sbusFailsafeTimeout = 100; // Failsafe is triggered after this timeout 
 
 // Channel assignment (use NONE for non existing channels!)
 // Remote channel #######   // Sound controller channel ##########################################
-#define STEERING 1           // CH1 steering
-#define GEARBOX 6            // CH2 3 position switch for gearbox (left throttle in tracked mode)
-#define THROTTLE 3           // CH3 throttle & brake (right throttle in tracked mode)
+#define STEERING NONE        // CH1 steering
+#define GEARBOX NONE         // CH2 3 position switch for gearbox (left throttle in tracked mode)
+#define THROTTLE 2           // CH3 throttle & brake (right throttle in tracked mode)
 #define HORN 5               // CH4 horn and bluelight / siren
-#define FUNCTION_R 2         // CH5 jake brake, high / low beam, headlight flasher, engine on / off
-#define FUNCTION_L 4         // CH6 indicators, hazards
-#define POT2 8               // CH7 pot 2
-#define MODE1 7              // CH8 mode 1 switch
-#define MODE2 9              // CH9 mode 2 switch
+#define FUNCTION_R 10        // CH5 jake brake, high / low beam, headlight flasher, engine on / off
+#define FUNCTION_L NONE      // CH6 indicators, hazards
+#define POT2 NONE            // CH7 pot 2
+#define MODE1 NONE           // CH8 mode 1 switch
+#define MODE2 8              // CH9 mode 2 switch
 #define MOMENTARY1 NONE      // CH10
 #define HAZARDS NONE         // CH11
 #define INDICATOR_LEFT NONE  // CH12
 #define INDICATOR_RIGHT NONE // CH13
 
 // Channels reversed or not
+// !!! CHANNELS OF SOUND DECODER, NOT RECEIVER
 boolean channelReversed[14] = {
     false, // CH0 (unused)
     false, // CH1
     false, // CH2
     false, // CH3
     false, // CH4
-    true,  // CH5
+    false, // CH5
     false, // CH6
     false, // CH7
     false, // CH8
@@ -121,14 +122,15 @@ boolean channelReversed[14] = {
 };
 
 // Channels auto zero adjustment or not (don't use it for channels without spring centered neutral position, switches or unused channels)
+// !!! CHANNELS OF SOUND DECODER, NOT RECEIVER
 boolean channelAutoZero[14] = {
     false, // CH0 (unused)
-    true,  // CH1
+    false, // CH1
     false, // CH2
     true,  // CH3
     false, // CH4
-    true,  // CH5
-    true,  // CH6
+    false, // CH5
+    false, // CH6
     false, // CH7
     false, // CH8
     false, // CH9

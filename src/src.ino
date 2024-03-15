@@ -3307,7 +3307,7 @@ void engineMassSimulation()
 #endif
       }
       else
-      {                                                                                             // Clutch engaged: Engine rpm synchronized with ESC power (speed)
+      { // Clutch engaged: Engine rpm synchronized with ESC power (speed)
 
 #if defined VIRTUAL_3_SPEED || defined VIRTUAL_16_SPEED_SEQUENTIAL // Virtual 3 speed or sequential 16 speed transmission
         targetRpm = reMap(curveLinear, (currentSpeed * virtualManualGearRatio[selectedGear] / 10)); // Add virtual gear ratios
@@ -3731,7 +3731,7 @@ void led()
     brakeLightsSub(0); // 0 brightness, if not braking
     break;
 
-  case 1:            // cab lights ---------------------------------------------------------------------
+  case 1: // cab lights ---------------------------------------------------------------------
 #ifdef NO_CABLIGHTS
     lightsState = 2; // Skip cablights
 #else
@@ -3760,7 +3760,7 @@ void led()
     brakeLightsSub(rearlightDimmedBrightness); // 50 brightness, if not braking
     break;
 
-  case 4:            // roof & side & head & fog lights ---------------------------------------------------------------------
+  case 4: // roof & side & head & fog lights ---------------------------------------------------------------------
 #ifdef NO_FOGLIGHTS
     lightsState = 5; // Skip foglights
 #endif
@@ -3770,7 +3770,7 @@ void led()
     brakeLightsSub(rearlightDimmedBrightness); // 50 brightness, if not braking
     break;
 
-  case 5:            // cab & roof & side & head & fog lights ---------------------------------------------------------------------
+  case 5: // cab & roof & side & head & fog lights ---------------------------------------------------------------------
 #ifdef NO_CABLIGHTS
     lightsState = 0; // Skip cablights
 #endif
