@@ -36,10 +36,10 @@
 // #include "vehicles/ManKat.h" // MAN KAT V8 Diesel German Bundeswehr military truck
 // #include "vehicles/MagirusDeutz256.h" // Magirus Deutz 256 air coolded V8 Diesel truck
 // #include "vehicles/MagirusMercur125.h" // Magirus Mercur air coolded V6 Diesel truck
-#include "vehicles/Saurer2DM.h" // Swiss Saurer 2DM R6 Diesel truck
+// #include "vehicles/Saurer2DM.h" // Swiss Saurer 2DM R6 Diesel truck
 
 // Russian trucks --------
-// #include "vehicles/Ural4320.h" // URAL 4320 6x6 V8 Diesel military truck
+#include "vehicles/Ural4320.h" // URAL 4320 6x6 V8 Diesel military truck
 // #include "vehicles/Ural375D.h" // URAL 375D 6x6 V8 petrol military truck
 // #include "vehicles/URAL375.h" // URAL 375D 6x6 V8 petrol military truck (new version with better V8 sound, but good bass speaker required)
 // #include "vehicles/GAZ66.h" // GAZ-66 V8 petrol military truck
