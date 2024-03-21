@@ -171,7 +171,7 @@ const uint8_t PWM_PINS[PWM_CHANNELS_NUM] = {13, 12, 14, 27, 35, 34}; // Input pi
 
 #define STEERING_PIN 13 // CH1 output for steering servo (bus communication only)
 #define SHIFTING_PIN 12 // CH2 output for shifting servo (bus communication only)
-#define WINCH_PIN 14    // CH3 output for winch servo (bus communication only)
+#define WINCH_PIN 3     // CH3 output for winch servo (bus communication only)
 #define COUPLER_PIN 27  // CH4 output for coupler (5th. wheel) servo (bus communication only)
 
 #ifdef WEMOS_D1_MINI_ESP32 // switching headlight pin depending on the board variant
@@ -179,8 +179,8 @@ const uint8_t PWM_PINS[PWM_CHANNELS_NUM] = {13, 12, 14, 27, 35, 34}; // Input pi
 #define CABLIGHT_PIN -1    // No Cabin lights
 #define NO_CABLIGHTS
 #else
-#define HEADLIGHT_PIN 3 // Headlights connected to GPIO 3
-#define CABLIGHT_PIN 22 // Cabin lights connected to GPIO 22
+#define HEADLIGHT_PIN 14 // Headlights connected to GPIO 3
+#define CABLIGHT_PIN 22  // Cabin lights connected to GPIO 22
 #endif
 
 #define TAILLIGHT_PIN 15       // Red tail- & brake-lights (combined)
@@ -3307,7 +3307,7 @@ void engineMassSimulation()
 #endif
       }
       else
-      {                                                                                             // Clutch engaged: Engine rpm synchronized with ESC power (speed)
+      { // Clutch engaged: Engine rpm synchronized with ESC power (speed)
 
 #if defined VIRTUAL_3_SPEED || defined VIRTUAL_16_SPEED_SEQUENTIAL // Virtual 3 speed or sequential 16 speed transmission
         targetRpm = reMap(curveLinear, (currentSpeed * virtualManualGearRatio[selectedGear] / 10)); // Add virtual gear ratios
@@ -3731,15 +3731,16 @@ void led()
     brakeLightsSub(0); // 0 brightness, if not braking
     break;
 
-  case 1:            // cab lights ---------------------------------------------------------------------
+  case 1: // cab lights + headligh on ---------------------------------------------------------------------
 #ifdef NO_CABLIGHTS
     lightsState = 2; // Skip cablights
 #else
     cabLight.pwm(cabLightsBrightness - crankingDim);
 #endif
     sideLight.off();
-    headLightsSub(false, false, false, false);
-    brakeLightsSub(0); // 0 brightness, if not braking
+    lightsOn = true;
+    headLightsSub(true, false, false, false);
+    brakeLightsSub(rearlightParkingBrightness); // 0 brightness, if not braking
     break;
 
   case 2: // cab & roof & side lights ---------------------------------------------------------------------
@@ -3760,7 +3761,7 @@ void led()
     brakeLightsSub(rearlightDimmedBrightness); // 50 brightness, if not braking
     break;
 
-  case 4:            // roof & side & head & fog lights ---------------------------------------------------------------------
+  case 4: // roof & side & head & fog lights ---------------------------------------------------------------------
 #ifdef NO_FOGLIGHTS
     lightsState = 5; // Skip foglights
 #endif
@@ -3770,7 +3771,7 @@ void led()
     brakeLightsSub(rearlightDimmedBrightness); // 50 brightness, if not braking
     break;
 
-  case 5:            // cab & roof & side & head & fog lights ---------------------------------------------------------------------
+  case 5: // cab & roof & side & head & fog lights ---------------------------------------------------------------------
 #ifdef NO_CABLIGHTS
     lightsState = 0; // Skip cablights
 #endif
@@ -4711,7 +4712,7 @@ void rcTriggerRead()
   static bool lightsStateLock;
   if (functionR75u.toggleLong(pulseWidth[5], 1150) != lightsStateLock)
   {
-    if (lightsState >= 5)
+    if (lightsState >= 1)
       lightsState = 0;
     else
       lightsState++;
@@ -4828,7 +4829,9 @@ void rcTriggerRead()
   static bool engineStateLock2;
   if (driveState == 0 && (engineState == OFF || engineState == RUNNING))
   { // Only, if vehicle stopped and engine idling or off!
-    if (momentary1Trigger.toggleLong(pulseWidth[10], 2000) != engineStateLock2)
+    momentary1 = momentary1Trigger.toggleLong(pulseWidth[10], 2000);
+    // momentary1 = momentary1Trigger.onOff(pulseWidth[10], 1800, 1200);
+    if (momentary1 != engineStateLock2)
     {
       engineOn = !engineOn; // This lock is required, because engine on / off needs to be able to be changed in other program sections!
       engineStateLock2 = !engineStateLock2;

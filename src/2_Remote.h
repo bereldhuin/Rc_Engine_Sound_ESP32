@@ -1,12 +1,12 @@
 #include <Arduino.h>
 
 // Select (remove //) the remote configuration profile you have:
-#define FLYSKY_FS_I6X // <------- Flysky FS-i6x
+// #define FLYSKY_FS_I6X // <------- Flysky FS-i6x
 // #define FLYSKY_FS_I6S_EXCAVATOR // <------- Flysky FS-i6s for KABOLITE K336 hydraulic excavator (use IBUS communication setting)
 // #define FLYSKY_GT5              // <------- Flysky GT5 / Reely GT6 EVO / Absima CR6P
 // #define RGT_EX86100             // <------- MT-305 remote delivered with RGT EX86100 crawler (use PWM communication setting)
 // #define GRAUPNER_MZ_12          // <------- Graupner MZ-12 PRO
-// #define MICRO_RC                // <------- The car style DIY "Micro RC" remote. Don't use this with standard remotes!
+#define MICRO_RC // <------- The car style DIY "Micro RC" remote. Don't use this with standard remotes!
 // #define MICRO_RC_STICK          // <------- The stick based DIY "Micro RC" remote. Don't use this with standard remotes!
 
 // For testing only!
@@ -23,14 +23,14 @@
 // PWM mode active, if SBUS, IBUS, SUMD and PPM are disabled (// in front of #define)
 
 // SBUS communication (RX header, 13 channels. This is my preferred communication protocol)--------
-// #define SBUS_COMMUNICATION // control signals are coming in via the SBUS interface (comment it out for classic PWM RC signals)
+#define SBUS_COMMUNICATION // control signals are coming in via the SBUS interface (comment it out for classic PWM RC signals)
 // NOTE: "boolean sbusInverted = true / false" was moved to the remote configuration profiles, so you don't have to change it
 uint32_t sbusBaud = 100000;         // Standard is 100000. Try to lower it, if your channels are coming in unstable. Working range is about 96000 - 104000.
 #define EMBEDDED_SBUS               // Embedded SBUS code is used instead of SBUS library, if defined (recommended)
 uint16_t sbusFailsafeTimeout = 100; // Failsafe is triggered after this timeout in milliseconds (about 100)
 
 // IBUS communication (RX header, 13 channels not recommended, NO FAILSAFE, if bad contact in iBUS wiring!) --------
-#define IBUS_COMMUNICATION // control signals are coming in via the IBUS interface (comment it out for classic PWM RC signals)
+// #define IBUS_COMMUNICATION // control signals are coming in via the IBUS interface (comment it out for classic PWM RC signals)
 
 // SUMD communication (RX header, 12 channels, For Graupner remotes) --------
 // #define SUMD_COMMUNICATION // control signals are coming in via the SUMD interface (comment it out for classic PWM RC signals)
@@ -92,7 +92,7 @@ uint16_t sbusFailsafeTimeout = 100; // Failsafe is triggered after this timeout 
 #define GEARBOX NONE         // CH2 3 position switch for gearbox (left throttle in tracked mode)
 #define THROTTLE 2           // CH3 throttle & brake (right throttle in tracked mode)
 #define HORN 5               // CH4 horn and bluelight / siren
-#define FUNCTION_R 10        // CH5 jake brake, high / low beam, headlight flasher, engine on / off
+#define FUNCTION_R 9         // CH5 jake brake, high / low beam, headlight flasher, engine on / off
 #define FUNCTION_L NONE      // CH6 indicators, hazards
 #define POT2 NONE            // CH7 pot 2
 #define MODE1 NONE           // CH8 mode 1 switch
@@ -554,19 +554,19 @@ boolean sbusInverted = true; // true = standard (non inverted) SBUS signal
 
 // Channel assignment (use NONE for non existing channels!)
 // Remote channel #######   // Sound controller channel ##########################################
-#define STEERING 1         // CH1 steering
-#define GEARBOX 2          // CH2 3 position switch for gearbox (left throttle in tracked mode)
-#define THROTTLE 3         // CH3 throttle & brake (right throttle in tracked mode)
-#define HORN 5             // CH4 horn and bluelight / siren
-#define FUNCTION_R 4       // CH5 jake brake, high / low beam, headlight flasher, engine on / off
-#define FUNCTION_L NONE    // CH6 indicators, hazards
-#define POT2 16            // CH7 pot2
-#define MODE1 6            // CH8 mode 1 switch
-#define MODE2 7            // CH9 mode 2 switch
-#define MOMENTARY1 8       // CH10
-#define HAZARDS 9          // CH11
-#define INDICATOR_LEFT 10  // CH12
-#define INDICATOR_RIGHT 11 // CH13
+#define STEERING NONE        // CH1 steering
+#define GEARBOX NONE         // CH2 3 position switch for gearbox (left throttle in tracked mode)
+#define THROTTLE 1           // CH3 throttle & brake (right throttle in tracked mode)
+#define HORN 2               // CH4 horn and bluelight / siren
+#define FUNCTION_R 3         // CH5 jake brake, high / low beam, headlight flasher, engine on / off
+#define FUNCTION_L NONE      // CH6 indicators, hazards
+#define POT2 NONE            // CH7 pot2
+#define MODE1 NONE           // CH8 mode 1 switch
+#define MODE2 4              // CH9 mode 2 switch
+#define MOMENTARY1 5         // CH10
+#define HAZARDS NONE         // CH11
+#define INDICATOR_LEFT NONE  // CH12
+#define INDICATOR_RIGHT NONE // CH13
 
 // Channels reversed or not
 boolean channelReversed[14] = {
@@ -578,8 +578,8 @@ boolean channelReversed[14] = {
     false, // CH5
     false, // CH6
     false, // CH7
-    true,  // CH8
-    true,  // CH9
+    false, // CH8
+    false, // CH9
     false, // CH10
     false, // CH11
     false, // CH12
@@ -589,11 +589,11 @@ boolean channelReversed[14] = {
 // Channels auto zero adjustment or not (don't use it for channels without spring centered neutral position, switches or unused channels)
 boolean channelAutoZero[14] = {
     false, // CH0 (unused)
-    true,  // CH1 true
+    false, // CH1 true
     false, // CH2
     true,  // CH3 true
     false, // CH4
-    true,  // CH5 true
+    false, // CH5 true
     false, // CH6
     false, // CH7
     false, // CH8
@@ -614,7 +614,7 @@ const uint16_t pulseSpan = 480;
 #define AUTO_INDICATORS
 
 // SBUS mode ----
-boolean sbusInverted = false; // false = non standard (inverted) SBUS signal
+boolean sbusInverted = true; // false = non standard (inverted) SBUS signal
 
 #endif
 

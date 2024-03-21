@@ -39,10 +39,11 @@
 // #include "vehicles/Saurer2DM.h" // Swiss Saurer 2DM R6 Diesel truck
 
 // Russian trucks --------
-#include "vehicles/Ural4320.h" // URAL 4320 6x6 V8 Diesel military truck
+// #include "vehicles/Ural4320.h" // URAL 4320 6x6 V8 Diesel military truck
 // #include "vehicles/Ural375D.h" // URAL 375D 6x6 V8 petrol military truck
 // #include "vehicles/URAL375.h" // URAL 375D 6x6 V8 petrol military truck (new version with better V8 sound, but good bass speaker required)
 // #include "vehicles/GAZ66.h" // GAZ-66 V8 petrol military truck
+#include "vehicles/Btr-82.h" // BTR-82 based on URAL 4320 6x6 V8 Diesel military truck
 
 // Russian tanks -------
 // #include "vehicles/IS3.h" // IS-3 WW2 battle tank, V12 Diesel (dual ESC mode, good bass speaker required)
