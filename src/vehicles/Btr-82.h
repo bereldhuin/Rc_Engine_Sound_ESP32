@@ -169,10 +169,10 @@ volatile int couplingVolumePercentage = 100; // Adjust the volume (usually = 100
 const boolean doubleFlashBlueLight = true; // double flash blue lights if "true", "rotating" beacons if "false"
 
 // Acceleration & deceleration settings ----------------------------------------------------------------------------------
-const uint8_t escRampTimeFirstGear = 20;  // determines, how fast the acceleration and deceleration happens (about 15 - 25, 20 for King Hauler)
-const uint8_t escRampTimeSecondGear = 50; // 50 for King Hauler (this value is always in use for automatic transmission, about 80)
-const uint8_t escRampTimeThirdGear = 75;  // 75 for King Hauler
-const uint8_t escBrakeSteps = 30;         // determines, how fast the ESC is able to brake down (20 - 30, 30 for King Hauler)
+const uint8_t escRampTimeFirstGear = 10;  // determines, how fast the acceleration and deceleration happens (about 15 - 25, 20 for King Hauler)
+const uint8_t escRampTimeSecondGear = 25; // 50 for King Hauler (this value is always in use for automatic transmission, about 80)
+const uint8_t escRampTimeThirdGear = 35;  // 75 for King Hauler
+const uint8_t escBrakeSteps = 20;         // determines, how fast the ESC is able to brake down (20 - 30, 30 for King Hauler)
 const uint8_t escAccelerationSteps = 3;   // determines, how fast the ESC is able to accelerate (2 - 3, 3 for King Hauler)
 
 // Gearbox parameters (select number of automatic gears in curves.h)-----------------------------------------------------
@@ -189,8 +189,8 @@ uint16_t clutchEngagingPoint = 80; // CEP. The "clutch" is engaging above this p
 uint32_t MAX_RPM_PERCENTAGE = 300; // NOTE! Was called TOP_SPEED_MULTIPLIER (TSM) in earlier versions and was a multiplier instead of a percentage!
 
 // Engine mass simulation
-const int8_t acc = 2; // Acceleration step (2) 1 = slow for locomotive engine, 9 = fast for trophy truck
-const int8_t dec = 1; // Deceleration step (1) 1 = slow for locomotive engine, 5 = fast for trophy truck
+const int8_t acc = 5; // Acceleration step (2) 1 = slow for locomotive engine, 9 = fast for trophy truck
+const int8_t dec = 3; // Deceleration step (1) 1 = slow for locomotive engine, 5 = fast for trophy truck
 
 // Vehicle type ----------------------------------------------------------------------------------------------------
 // #define TRACKED_MODE // For Tanks, diggers, excavators etc. which use dual throttle input on CH2 and CH3
